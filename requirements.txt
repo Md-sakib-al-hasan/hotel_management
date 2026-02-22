@@ -1,0 +1,11 @@
+# Hotel Management System — Requirements
+# All dependencies are from the Python standard library.
+# No external packages required!
+# 
+# Required: Python 3.8+
+# Built-in modules used:
+#   - tkinter      (GUI framework)
+#   - sqlite3      (database)
+#   - hashlib      (password hashing)
+#   - datetime     (date handling)
+#   - os, sys      (file paths)
