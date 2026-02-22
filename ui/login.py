@@ -105,8 +105,24 @@ class LoginWindow:
         left.pack(side="left", fill="y")
         left.pack_propagate(False)
 
-        tk.Frame(left, bg=ACCENT).pack(fill="both", expand=True)
-        tk.Label(left, text="🏨", font=("Arial", 56), bg=ACCENT, fg=TEXT).pack()
+        top_sp = tk.Frame(left, bg=ACCENT); top_sp.pack(fill="both", expand=True)
+
+        # Handle Logo Image
+        try:
+            logo_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "hotel_logo.png")
+            self.logo_img = tk.PhotoImage(file=logo_path)
+            # Scale down if too big (example: if it's 1024x1024, subsample by 8 makes it 128x128)
+            # Adjust subsample factors based on chosen icon size
+            if self.logo_img.width() > 150:
+                fact = self.logo_img.width() // 120
+                if fact > 0: self.logo_img = self.logo_img.subsample(fact, fact)
+            
+            self.logo_lbl = tk.Label(left, image=self.logo_img, bg=ACCENT)
+            self.logo_lbl.pack(pady=(20, 0))
+        except Exception as e:
+            # Fallback to emoji if image fails
+            tk.Label(left, text="🏨", font=("Arial", 56), bg=ACCENT, fg=TEXT).pack()
+
         tk.Label(left, text="Grand Hotel", font=("Arial", 23, "bold"), bg=ACCENT, fg=TEXT).pack(pady=(6, 2))
         tk.Label(left, text="Management System", font=("Arial", 13), bg=ACCENT, fg="#bfdbfe").pack()
         tk.Frame(left, bg="#93c5fd", height=1, width=200).pack(pady=18)
